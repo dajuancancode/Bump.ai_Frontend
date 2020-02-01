@@ -29,6 +29,8 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        
+        alignment: AlignmentDirectional(0.0, 0.0),
         height: double.infinity,
         width: double.infinity,
         child: pageView,

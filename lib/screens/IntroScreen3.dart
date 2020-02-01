@@ -6,18 +6,40 @@ class IntroScreen3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        child: Container(
-          child: Container(
-           child: Image(image: AssetImage("assets/img3.jpeg"),),
-        ),
-        ),
-        decoration: BoxDecoration(
-        
-        ),
-      )
-    );
+        body: Container(
+      height: 500,
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: 75.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            child: Image(
+              image: AssetImage("assets/img3.jpeg"),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 90),
+            child: Text("Rate Songs",
+                style: TextStyle(
+                  fontSize: 40,
+                  foreground: Paint()
+                    ..strokeWidth = 2
+                    ..color = Color.fromRGBO(0, 96, 100, 1),
+                )),
+          ),
+          Container(
+            child: Text(
+              "Lorem ipsum dolor sit amet, consectetur adjepo elit"
+            ),
+          ),
+          Container(
+            //Start button to the next slide
+            // child: ,
+          )
+        ],
+      ),
+      decoration: BoxDecoration(),
+    ));
   }
 }
