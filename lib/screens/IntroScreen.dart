@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'Splash.dart';
 
-class Home extends StatelessWidget {
-    final pageController = PageController(
-    initialPage: 1,
-);
+//Screen use to introduce the user to the app
+//Stateless widget. No data changes in here
+class IntroScreen extends StatelessWidget {
+  final pageView = PageView(
+    controller: ,
+    children: <Widget>[
+      page1Widget(),
+      page2Widget(),
+    ],
+  )
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
