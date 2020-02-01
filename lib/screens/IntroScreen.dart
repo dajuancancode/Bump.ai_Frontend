@@ -1,27 +1,39 @@
 import 'package:flutter/material.dart';
 import 'Splash.dart';
+import "package:bump_frontend/screens/IntroScreen1.dart";
+import "package:bump_frontend/screens/IntroScreen2.dart";
+import "package:bump_frontend/screens/IntroScreen3.dart";
 
 //Screen use to introduce the user to the app
 //Stateless widget. No data changes in here
 class IntroScreen extends StatelessWidget {
   final pageView = PageView(
-    controller: ,
+    controller: Home().PageContr,
+    scrollDirection: Axis.horizontal,
     children: <Widget>[
-      page1Widget(),
-      page2Widget(),
+      Container(
+        color: Colors.pink,
+        child: IntroScreen1(),
+      ),
+      Container(
+        color: Colors.red,
+        child: IntroScreen2(),
+      ),
+      Container(
+        color: Colors.red,
+        child: IntroScreen3(),
+      ),
     ],
-  )
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: pageView,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
-            colors: [const Color(0xFFFFFFEE), const Color(0xFF999999)], // whitish to gray
-            tileMode: TileMode.repeated, // repeats the gradient over the canvas
-          ),
+        
         ),
       )
     );

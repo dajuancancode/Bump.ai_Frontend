@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-    final pageController = PageController(
+    var PageContr = PageController(
     initialPage: 1,
 );
   @override
