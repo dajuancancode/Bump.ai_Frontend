@@ -1,9 +1,11 @@
+import 'package:bump_frontend/screens/IntroScreen.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {
-
+    final PageContr = PageController(initialPage: 1,);
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: Container(
         alignment: Alignment(0,0),
@@ -33,7 +35,8 @@ class Splash extends StatelessWidget {
             SizedBox(height: 400),
             FlatButton(
               onPressed: () {
-                
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => IntroScreen()));
               },
               padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
               shape: RoundedRectangleBorder(
