@@ -44,18 +44,19 @@ class IntroScreen1 extends StatelessWidget {
                   color: const Color(0xFF006064),
                   fontFamily: "Poppins",
                   fontWeight: FontWeight.w500,
-                  fontSize: 30.0,
+                  fontSize: 25.0,
                 ),
               ),
               SizedBox(height: 15),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Center(
                   child: Text(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut erat efficitur, euismod sapien sit amet, vestibulum leo. Cras tempor mollis viverra. Nulla rutrum suscipit. ",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Poppins",
-                      fontSize: 16.0,
+                      fontSize: 14.0,
                       fontWeight: FontWeight.w400,
                     ),
                   ),

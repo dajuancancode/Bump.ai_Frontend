@@ -41,7 +41,10 @@ class Splash extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
               shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(10.0),
-                side: BorderSide(color: Colors.black),
+                side: BorderSide(
+                  color: Colors.black,
+                  width: 3.0,
+                ),
               ),
               child: Text(
                 "Get Started",

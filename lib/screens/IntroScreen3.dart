@@ -43,18 +43,19 @@ class IntroScreen3 extends StatelessWidget {
                   color: const Color(0xFF006064),
                   fontFamily: "Poppins",
                   fontWeight: FontWeight.w500,
-                  fontSize: 30.0,
+                  fontSize: 25.0,
                 ),
               ),
               SizedBox(height: 15),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Center(
                   child: Text(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut erat efficitur, euismod sapien sit amet, vestibulum leo. Cras tempor mollis viverra. Nulla rutrum suscipit. ",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Poppins",
-                      fontSize: 16.0,
+                      fontSize: 14.0,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -69,6 +70,7 @@ class IntroScreen3 extends StatelessWidget {
             children: <Widget>[
               FlatButton(
               onPressed: () {},
+              color: const Color(0xFF006064),
               padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
               shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(10.0),
@@ -80,10 +82,10 @@ class IntroScreen3 extends StatelessWidget {
               child: Text(
                 "Start Detecting",
                 style: TextStyle(
-                  color: const Color(0xFF006064),
+                  color: Colors.white,
                   fontWeight: FontWeight.w300,
                   fontFamily: "Poppins",
-                  fontSize: 20.0,
+                  fontSize: 16.0,
                 ),
               ),
             ),
