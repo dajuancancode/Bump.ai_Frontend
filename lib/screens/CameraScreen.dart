@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
+import 'package:http/http.dart' as http;
 
 class CameraExampleHome extends StatefulWidget {
   @override
@@ -261,10 +262,12 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
   }
 
   void onStopButtonPressed() {
-    stopVideoRecording().then((_) {
+    stopVideoRecording().then((_) async {
       if (mounted) setState(() {});
       showInSnackBar('Video recorded to: $videoPath');
-      print("$videoPath");
+      var url = "http://127.0.0.1:5000";
+      var response = await http.post(url, body: {"file": "$videoPath"});
+      print(response);
     });
   }
 
@@ -288,7 +291,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
       return null;
     }
 
-    final Directory extDir = await getApplicationDocumentsDirectory();
+    final Directory extDir = await getExternalStorageDirectory();
     final String dirPath = '${extDir.path}/Movies/flutter_test';
     await Directory(dirPath).create(recursive: true);
     final String filePath = '$dirPath/${timestamp()}.mp4';
@@ -377,7 +380,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
       showInSnackBar('Error: select a camera first.');
       return null;
     }
-    final Directory extDir = await getApplicationDocumentsDirectory();
+    final Directory extDir = await getApplicationSupportDirectory();
     final String dirPath = '${extDir.path}/Pictures/flutter_test';
     await Directory(dirPath).create(recursive: true);
     final String filePath = '$dirPath/${timestamp()}.jpg';
