@@ -7,16 +7,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
 class CameraExampleHome extends StatefulWidget {
-  
   @override
   _CameraExampleHomeState createState() {
-    main();
     return _CameraExampleHomeState();
   }
-}
-
-Future<void> main() async {
-  cameras = await availableCameras();
 }
 
 /// Returns a suitable camera icon for [direction].
@@ -43,13 +37,10 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
   VideoPlayerController videoController;
   VoidCallback videoPlayerListener;
   bool enableAudio = true;
+
   @override
   void initState() {
     super.initState();
-    controller = CameraController(cameras[0], ResolutionPreset.medium);
-    controller.initialize().then((_) {
-      setState(() {});
-    });
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -69,7 +60,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
       controller?.dispose();
     } else if (state == AppLifecycleState.resumed) {
       if (controller != null) {
-        onNewCameraSelected();
+        onNewCameraSelected(controller.description);
       }
     }
   }
@@ -79,7 +70,10 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,    
+      key: _scaffoldKey,
+      appBar: AppBar(
+        title: const Text('Camera example'),
+      ),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -149,7 +143,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
             onChanged: (bool value) {
               enableAudio = value;
               if (controller != null) {
-                onNewCameraSelected();
+                onNewCameraSelected(controller.description);
               }
             },
           ),
@@ -198,6 +192,15 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.camera_alt),
+          color: Colors.blue,
+          onPressed: controller != null &&
+                  controller.value.isInitialized &&
+                  !controller.value.isRecordingVideo
+              ? onTakePictureButtonPressed
+              : null,
+        ),
         IconButton(
           icon: const Icon(Icons.videocam),
           color: Colors.blue,
@@ -248,6 +251,9 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
               title: Icon(getCameraLensIcon(cameraDescription.lensDirection)),
               groupValue: controller?.description,
               value: cameraDescription,
+              onChanged: controller != null && controller.value.isRecordingVideo
+                  ? null
+                  : onNewCameraSelected,
             ),
           ),
         );
@@ -263,12 +269,12 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(message)));
   }
 
-  void onNewCameraSelected() async {
+  void onNewCameraSelected(CameraDescription cameraDescription) async {
     if (controller != null) {
       await controller.dispose();
     }
     controller = CameraController(
-      cameras[0],
+      cameraDescription,
       ResolutionPreset.medium,
       enableAudio: enableAudio,
     );
@@ -464,8 +470,7 @@ class CameraApp extends StatelessWidget {
 
 List<CameraDescription> cameras = [];
 
-
-Future<void> getReady() async {
+Future<void> main() async {
   // Fetch the available cameras before initializing the app.
   try {
     WidgetsFlutterBinding.ensureInitialized();
@@ -473,4 +478,5 @@ Future<void> getReady() async {
   } on CameraException catch (e) {
     logError(e.code, e.description);
   }
+  runApp(CameraApp());
 }
