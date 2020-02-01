@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "package:bump_frontend/screens/CameraScreen.dart";
 
 class IntroScreen3 extends StatelessWidget {
   @override
@@ -69,7 +70,10 @@ class IntroScreen3 extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                 Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => CameraExampleHome()));
+              },
               color: const Color(0xFF006064),
               padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
               shape: RoundedRectangleBorder(
