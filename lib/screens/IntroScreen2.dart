@@ -20,7 +20,7 @@ class IntroScreen2 extends StatelessWidget {
           ),
            Container(
             margin: const EdgeInsets.only(top: 90),
-            child: Text("Play Music",
+            child: Text("Detect Motion",
                 style: TextStyle(
                   fontSize: 40,
                   foreground: Paint()
