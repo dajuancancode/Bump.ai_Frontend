@@ -17,9 +17,10 @@ class Splash extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 90, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: SafeArea(
                 child: Text(
                   "DoesItBump.ai",
@@ -32,7 +33,9 @@ class Splash extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 400),
+            Image(
+              image: AssetImage("assets/IconBackground.png"),
+            ),
             FlatButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
