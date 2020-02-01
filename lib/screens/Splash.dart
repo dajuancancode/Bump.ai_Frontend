@@ -2,7 +2,7 @@ import 'package:bump_frontend/screens/IntroScreen.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {
-    final PageContr = PageController(initialPage: 1,);
+    final pageContr = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     

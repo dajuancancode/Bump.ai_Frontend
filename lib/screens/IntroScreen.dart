@@ -8,7 +8,7 @@ import "package:bump_frontend/screens/IntroScreen3.dart";
 //Stateless widget. No data changes in here
 class IntroScreen extends StatelessWidget {
   final pageView = PageView(
-    controller: Splash().PageContr,
+     controller: Splash().pageContr,
     scrollDirection: Axis.horizontal,
     children: <Widget>[
       Container(
