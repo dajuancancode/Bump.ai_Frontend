@@ -41,6 +41,14 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
   @override
   void initState() {
     super.initState();
+    if (cameras.isEmpty) {
+        availableCameras().then((val) => {
+      setState(() {
+        cameras = val;
+      })
+    });
+    }
+    
     WidgetsBinding.instance.addObserver(this);
   }
 
