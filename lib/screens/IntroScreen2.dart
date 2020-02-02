@@ -33,8 +33,8 @@ class IntroScreen2 extends StatelessWidget {
                       style: TextStyle(
                           color: const Color(0xFF006064),
                           fontFamily: "Poppins",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.0),
+                          fontWeight: FontWeight.w300,
+                          fontSize: 16.0),
                     ),
                   ),
                 ],
@@ -68,29 +68,41 @@ class IntroScreen2 extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Poppins",
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w300,
                     ),
                   ),
                 )
               ],
             ),
+            SizedBox(height: 30.0),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 FlatButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => IntroScreen3()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => IntroScreen3()));
                   },
-                  child: Row(
-                    children: <Widget>[
-                      Text("Next"),
-                      Icon(
-                        Icons.arrow_right,
-                      ),
-                    ],
+                  color: const Color(0xFF006064),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 57.0, vertical: 15.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
+                    side:
+                        BorderSide(color: const Color(0xFF006064), width: 3.0),
+                  ),
+                  child: Text(
+                    "Next",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: "Poppins",
+                      fontSize: 16.0,
+                    ),
                   ),
                 ),
               ],

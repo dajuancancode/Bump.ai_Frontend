@@ -33,7 +33,6 @@ void logError(String code, String message) =>
 class _CameraExampleHomeState extends State<CameraExampleHome>
     with WidgetsBindingObserver {
   CameraController controller;
-  String imagePath;
   String videoPath;
   VideoPlayerController videoController;
   VoidCallback videoPlayerListener;
@@ -100,16 +99,11 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
             ),
           ),
           _captureControlRowWidget(),
-         
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+         Row(
               children: <Widget>[
                 _cameraTogglesRowWidget(),
               ],
             ),
-          ),
         ],
       ),
     );
@@ -189,15 +183,18 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     } else {
       for (CameraDescription cameraDescription in cameras) {
         toggles.add(
-          SizedBox(
-            width: 90.0,
-            child: RadioListTile<CameraDescription>(
-              title: Icon(getCameraLensIcon(cameraDescription.lensDirection)),
-              groupValue: controller?.description,
-              value: cameraDescription,
-              onChanged: controller != null && controller.value.isRecordingVideo
-                  ? null
-                  : onNewCameraSelected,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: SizedBox(
+              width: 90.0,
+              child: RadioListTile<CameraDescription>(
+                title: Icon(getCameraLensIcon(cameraDescription.lensDirection)),
+                groupValue: controller?.description,
+                value: cameraDescription,
+                onChanged: controller != null && controller.value.isRecordingVideo
+                    ? null
+                    : onNewCameraSelected,
+              ),
             ),
           ),
         );
@@ -241,33 +238,17 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     }
   }
 
-  void onTakePictureButtonPressed() {
-    takePicture().then((String filePath) {
-      if (mounted) {
-        setState(() {
-          imagePath = filePath;
-          videoController?.dispose();
-          videoController = null;
-        });
-        if (filePath != null) showInSnackBar('Picture saved to $filePath');
-      }
-    });
-  }
-
   void onVideoRecordButtonPressed() {
     startVideoRecording().then((String filePath) {
       if (mounted) setState(() {});
-      if (filePath != null) showInSnackBar('Saving video to $filePath');
     });
   }
 
   void onStopButtonPressed() {
     stopVideoRecording().then((_) async {
       if (mounted) setState(() {});
-      showInSnackBar('Video recorded to: $videoPath');
       var url = "http://127.0.0.1:5000";
       var response = await http.post(url, body: {"file": "$videoPath"});
-      print(response);
     });
   }
 
@@ -323,7 +304,6 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
       return null;
     }
 
-    await _startVideoPlayer();
   }
 
   Future<void> pauseVideoRecording() async {
@@ -350,53 +330,6 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
       _showCameraException(e);
       rethrow;
     }
-  }
-
-  Future<void> _startVideoPlayer() async {
-    final VideoPlayerController vcontroller =
-        VideoPlayerController.file(File(videoPath));
-    videoPlayerListener = () {
-      if (videoController != null && videoController.value.size != null) {
-        // Refreshing the state to update video player with the correct ratio.
-        if (mounted) setState(() {});
-        videoController.removeListener(videoPlayerListener);
-      }
-    };
-    vcontroller.addListener(videoPlayerListener);
-    await vcontroller.setLooping(true);
-    await vcontroller.initialize();
-    await videoController?.dispose();
-    if (mounted) {
-      setState(() {
-        imagePath = null;
-        videoController = vcontroller;
-      });
-    }
-    await vcontroller.play();
-  }
-
-  Future<String> takePicture() async {
-    if (!controller.value.isInitialized) {
-      showInSnackBar('Error: select a camera first.');
-      return null;
-    }
-    final Directory extDir = await getApplicationSupportDirectory();
-    final String dirPath = '${extDir.path}/Pictures/flutter_test';
-    await Directory(dirPath).create(recursive: true);
-    final String filePath = '$dirPath/${timestamp()}.jpg';
-
-    if (controller.value.isTakingPicture) {
-      // A capture is already pending, do nothing.
-      return null;
-    }
-
-    try {
-      await controller.takePicture(filePath);
-    } on CameraException catch (e) {
-      _showCameraException(e);
-      return null;
-    }
-    return filePath;
   }
 
   void _showCameraException(CameraException e) {

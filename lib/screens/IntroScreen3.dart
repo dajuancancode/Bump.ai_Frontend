@@ -89,7 +89,7 @@ class IntroScreen3 extends StatelessWidget {
                   },
                   color: const Color(0xFF006064),
                   padding:
-                      EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      EdgeInsets.symmetric(horizontal: 16.5, vertical: 15.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                     side:
